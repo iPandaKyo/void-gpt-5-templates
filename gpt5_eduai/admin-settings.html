@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Settings • Edu AI</title>
+    <meta name="description" content="Admin settings for Edu AI." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="auth.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <header class="auth-header">
+      <div class="container nav">
+        <a class="brand" href="index.html" style="text-decoration:none;color:inherit">
+          <div class="brand-logo"></div>
+          <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+        </a>
+        <div class="links">
+          <span class="muted">Signed in as <strong id="currentUserEmail">—</strong></span>
+          <a class="btn btn-ghost" href="admin-dashboard.html"><i class="ri-dashboard-line"></i> Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash">
+      <div class="container layout">
+        <aside class="sidebar" id="sidebar">
+          <div class="side-head">
+            <div class="brand">
+              <div class="brand-logo"></div>
+              <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+            </div>
+          </div>
+          <nav class="side-nav">
+            <a class="side-link" href="admin-dashboard.html" title="Dashboard"><i class="ri-dashboard-line"></i><span>Dashboard</span></a>
+            <a class="side-link" href="admin-users.html" title="Users"><i class="ri-team-line"></i><span>Users</span></a>
+            <a class="side-link" href="admin-analytics.html" title="Analytics"><i class="ri-line-chart-line"></i><span>Analytics</span></a>
+            <a class="side-link active" href="#" title="Settings"><i class="ri-settings-3-line"></i><span>Settings</span></a>
+          </nav>
+          <div class="side-foot">
+            <label class="theme-toggle"><input type="checkbox" id="themeToggle" /><span class="switch"></span><span class="label">Dark mode</span></label>
+          </div>
+        </aside>
+
+        <section class="content">
+          <div class="topbar">
+            <div class="search"><i class="ri-tools-line"></i><span class="muted">Settings</span></div>
+            <div class="actions">
+              <button class="btn btn-ghost" id="logoutBtn"><i class="ri-logout-box-r-line"></i> Log out</button>
+            </div>
+          </div>
+
+          <div id="settingsToast" hidden></div>
+
+          <div class="card-grid">
+            <!-- Organization profile -->
+            <div class="panel">
+              <div class="panel-head"><h4>Organization profile</h4><span class="muted">Name, domain, contact</span></div>
+              <form id="orgForm" class="fields">
+                <div class="field">
+                  <label for="orgName">Organization name</label>
+                  <div class="control"><input type="text" id="orgName" placeholder="Acme School District" /></div>
+                </div>
+                <div class="field">
+                  <label for="orgDomain">Primary domain</label>
+                  <div class="control"><input type="text" id="orgDomain" placeholder="acme.k12.edu" /></div>
+                </div>
+                <div class="field">
+                  <label for="orgContact">Contact email</label>
+                  <div class="control"><input type="email" id="orgContact" placeholder="admin@acme.k12.edu" /></div>
+                </div>
+                <div class="actions"><button type="submit" class="btn btn-primary"><i class="ri-save-3-line"></i> Save</button></div>
+              </form>
+            </div>
+
+            <!-- Appearance -->
+            <div class="panel">
+              <div class="panel-head"><h4>Appearance</h4><span class="muted">Theme</span></div>
+              <div class="fields">
+                <div class="field">
+                  <label>Theme</label>
+                  <div class="row">
+                    <label class="theme-toggle"><input type="checkbox" id="themeToggleLocal" /><span class="switch"></span><span class="label">Dark mode</span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="panel">
+              <div class="panel-head"><h4>Notifications</h4><span class="muted">Email preferences</span></div>
+              <form id="notifForm" class="fields">
+                <div class="field">
+                  <label class="badge"><input type="checkbox" id="notifProduct" /> Product updates</label>
+                </div>
+                <div class="field">
+                  <label class="badge"><input type="checkbox" id="notifAlerts" /> System alerts</label>
+                </div>
+                <div class="field">
+                  <label for="notifDigest">Digest frequency</label>
+                  <select id="notifDigest" class="select">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="never">Never</option>
+                  </select>
+                </div>
+                <div class="actions"><button type="submit" class="btn btn-primary"><i class="ri-save-3-line"></i> Save</button></div>
+              </form>
+            </div>
+
+            <!-- Security -->
+            <div class="panel">
+              <div class="panel-head"><h4>Security</h4><span class="muted">Change password</span></div>
+              <form id="pwForm" class="fields">
+                <div class="field">
+                  <label for="curPw">Current password</label>
+                  <div class="control"><input type="password" id="curPw" placeholder="••••••••" /></div>
+                </div>
+                <div class="field">
+                  <label for="newPw">New password</label>
+                  <div class="control"><input type="password" id="newPw" placeholder="At least 8 characters" /></div>
+                </div>
+                <div class="field">
+                  <label for="newPw2">Confirm password</label>
+                  <div class="control"><input type="password" id="newPw2" placeholder="Re-enter password" /></div>
+                </div>
+                <div class="actions"><button type="submit" class="btn btn-primary"><i class="ri-shield-check-line"></i> Update password</button></div>
+              </form>
+            </div>
+
+            <!-- SSO (mock) -->
+            <div class="panel">
+              <div class="panel-head"><h4>Single sign-on (SSO)</h4><span class="muted">Mock configuration</span></div>
+              <form id="ssoForm" class="fields">
+                <div class="field">
+                  <label class="badge"><input type="checkbox" id="ssoEnabled" /> Enable SSO (mock)</label>
+                </div>
+                <div class="field">
+                  <label for="ssoProvider">Provider</label>
+                  <select id="ssoProvider" class="select">
+                    <option value="Google">Google</option>
+                    <option value="Microsoft">Microsoft</option>
+                    <option value="Okta">Okta</option>
+                    <option value="Generic">Generic OIDC</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="ssoClientId">Client ID</label>
+                  <div class="control"><input type="text" id="ssoClientId" placeholder="client-id" /></div>
+                </div>
+                <div class="field">
+                  <label for="ssoClientSecret">Client secret</label>
+                  <div class="control"><input type="password" id="ssoClientSecret" placeholder="••••••••" /></div>
+                </div>
+                <div class="actions"><button type="submit" class="btn btn-primary"><i class="ri-save-3-line"></i> Save</button></div>
+              </form>
+            </div>
+
+            <!-- API keys (mock) -->
+            <div class="panel">
+              <div class="panel-head"><h4>API keys</h4><span class="muted">Generate and manage</span></div>
+              <div class="fields">
+                <div class="row" style="gap:10px">
+                  <div class="control" style="flex:1"><input type="text" id="apiLabel" placeholder="Key label (e.g., Backend service)" /></div>
+                  <button class="btn btn-primary" id="apiGenerate"><i class="ri-key-2-line"></i> Generate</button>
+                </div>
+                <div class="table-wrap">
+                  <table class="table" id="apiTable">
+                    <thead>
+                      <tr><th>Label</th><th>Key</th><th>Created</th><th>Status</th><th></th></tr>
+                    </thead>
+                    <tbody id="apiBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Data & exports -->
+            <div class="panel">
+              <div class="panel-head"><h4>Data & exports</h4><span class="muted">Export or reset demo data</span></div>
+              <div class="fields">
+                <div class="row" style="gap:10px;flex-wrap:wrap">
+                  <button class="btn btn-ghost" id="exportSettings"><i class="ri-download-2-line"></i> Export settings</button>
+                  <button class="btn btn-ghost" id="exportUsers"><i class="ri-download-2-line"></i> Export users</button>
+                </div>
+                <div class="field">
+                  <div class="error" style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                    <div><strong>Danger zone:</strong> Reset all demo data (users, keys, settings)</div>
+                    <button class="btn btn-primary" id="resetData"><i class="ri-alert-line"></i> Reset</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="auth-footer">
+      <div class="container foot">
+        <div class="brand" style="gap:10px">
+          <div class="brand-logo" style="width:26px;height:26px;border-radius:7px"></div>
+          <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+        </div>
+        <div class="links"><a href="index.html#faq">Privacy</a><a href="index.html#pricing">Pricing</a></div>
+      </div>
+    </footer>
+
+    <!-- Reset confirm modal -->
+    <div class="modal" id="resetModal" hidden>
+      <div class="modal-backdrop" data-close></div>
+      <div class="modal-card">
+        <div class="modal-head">
+          <h4>Reset demo data</h4>
+          <button class="icon-btn" data-close aria-label="Close"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="muted">This will clear users, API keys, and settings. This cannot be undone.</div>
+        <div class="actions" style="margin-top:14px">
+          <button class="btn btn-ghost" data-close>Cancel</button>
+          <button class="btn btn-primary" id="confirmReset"><i class="ri-alert-line"></i> Reset now</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="admin-settings.js"></script>
+  </body>
+  </html>
+
+

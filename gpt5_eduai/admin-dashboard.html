@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Admin Dashboard • Edu AI</title>
+    <meta name="description" content="Admin dashboard for Edu AI." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="auth.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <header class="auth-header">
+      <div class="container nav">
+        <a class="brand" href="index.html" style="text-decoration:none;color:inherit">
+          <div class="brand-logo"></div>
+          <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+        </a>
+        <div class="links">
+          <span class="muted">Signed in as <strong id="currentUserEmail">—</strong></span>
+          <button class="btn btn-ghost" id="logoutBtn"><i class="ri-logout-box-r-line"></i> Log out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash">
+      <div class="container layout">
+        <aside class="sidebar" id="sidebar">
+          <div class="side-head">
+            <div class="brand">
+              <div class="brand-logo"></div>
+              <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+            </div>
+            <button id="toggleSidebar" class="icon-btn" aria-label="Toggle sidebar" title="Toggle sidebar"><i class="ri-menu-fold-line"></i></button>
+          </div>
+          <nav class="side-nav">
+            <a class="side-link active" href="#" data-route="dashboard" title="Dashboard"><i class="ri-dashboard-line"></i><span>Dashboard</span></a>
+            <a class="side-link" href="admin-users.html" title="Users"><i class="ri-team-line"></i><span>Users</span></a>
+            <a class="side-link" href="admin-analytics.html" title="Analytics"><i class="ri-line-chart-line"></i><span>Analytics</span></a>
+            <a class="side-link" href="admin-settings.html" title="Settings"><i class="ri-settings-3-line"></i><span>Settings</span></a>
+          </nav>
+          <div class="side-foot">
+            <label class="theme-toggle"><input type="checkbox" id="themeToggle" /><span class="switch"></span><span class="label">Dark mode</span></label>
+          </div>
+        </aside>
+
+        <section class="content">
+          <div class="topbar" data-view="dashboard">
+            <div class="search">
+              <i class="ri-search-line"></i>
+              <input id="searchInput" type="search" placeholder="Search admins…" />
+            </div>
+            <div class="actions">
+              <select id="rangeSelect" class="select">
+                <option value="7">Last 7 days</option>
+                <option value="30" selected>Last 30 days</option>
+                <option value="90">Last 90 days</option>
+              </select>
+              <button class="btn btn-ghost" id="addAdminBtn"><i class="ri-user-add-line"></i> Quick add</button>
+            </div>
+          </div>
+
+          <div class="stats" data-view="dashboard">
+            <div class="stat">
+              <div class="stat-head">
+                <h3>Total admins</h3>
+                <span class="delta up" id="deltaTotal">+0%</span>
+              </div>
+              <div class="num" id="userCount">0</div>
+              <canvas class="spark" id="sparkTotal" height="40"></canvas>
+            </div>
+            <div class="stat">
+              <div class="stat-head">
+                <h3>New this period</h3>
+                <span class="delta up" id="deltaNew">+0%</span>
+              </div>
+              <div class="num" id="newThisPeriod">0</div>
+              <canvas class="spark" id="sparkNew" height="40"></canvas>
+            </div>
+            <div class="stat">
+              <div class="stat-head">
+                <h3>Active today</h3>
+                <span class="delta" id="deltaActive">~</span>
+              </div>
+              <div class="num" id="activeToday">0</div>
+              <canvas class="spark" id="sparkActive" height="40"></canvas>
+            </div>
+          </div>
+
+          <div class="charts" data-view="dashboard">
+            <div class="panel">
+              <div class="panel-head">
+                <h4>Admin signups</h4>
+                <span class="muted">Last <span id="rangeLabel">30</span> days</span>
+              </div>
+              <canvas id="signupsChart" height="120"></canvas>
+            </div>
+            <div class="panel">
+              <div class="panel-head">
+                <h4>Roles distribution</h4>
+              </div>
+              <canvas id="rolesChart" height="120"></canvas>
+            </div>
+            <div class="panel">
+              <div class="panel-head">
+                <h4>Activity by weekday</h4>
+              </div>
+              <canvas id="activityChart" height="120"></canvas>
+            </div>
+          </div>
+
+          <div class="panel" data-view="dashboard">
+            <div class="panel-head">
+              <h4>Recent admins</h4>
+              <div class="filters">
+                <select id="roleFilter" class="select">
+                  <option value="all" selected>All roles</option>
+                  <option value="Owner">Owner</option>
+                  <option value="Manager">Manager</option>
+                  <option value="Staff">Staff</option>
+                </select>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="table" id="usersTable">
+                <thead>
+                  <tr>
+                    <th data-sort="name">Name</th>
+                    <th>Email</th>
+                    <th data-sort="role">Role</th>
+                    <th data-sort="date">Created</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel" data-view="dashboard">
+            <div class="panel-head">
+              <h4>System status</h4>
+              <span class="muted"><span class="status-dot ok"></span> All systems normal</span>
+            </div>
+            <div class="status-grid">
+              <div class="status-item"><span>API</span><span class="tag">Operational</span></div>
+              <div class="status-item"><span>Auth</span><span class="tag">Operational</span></div>
+              <div class="status-item"><span>Storage</span><span class="tag">Operational</span></div>
+              <div class="status-item"><span>Realtime</span><span class="tag">Operational</span></div>
+            </div>
+          </div>
+
+          <!-- Users management view -->
+          <div class="users-view" data-view="users" hidden>
+            <div class="panel users-toolbar">
+              <div class="users-tools-left">
+                <div class="search"><i class="ri-search-line"></i><input id="usersSearch" type="search" placeholder="Search by name or email…" /></div>
+                <select id="usersRole" class="select">
+                  <option value="all" selected>All roles</option>
+                  <option value="Owner">Owner</option>
+                  <option value="Manager">Manager</option>
+                  <option value="Staff">Staff</option>
+                </select>
+                <select id="usersStatus" class="select">
+                  <option value="all" selected>All statuses</option>
+                  <option value="Active">Active</option>
+                  <option value="Suspended">Suspended</option>
+                </select>
+              </div>
+              <div class="users-tools-right">
+                <button class="btn btn-ghost" id="usersExport"><i class="ri-download-2-line"></i> Export</button>
+                <label class="btn btn-ghost" for="usersImportInput"><i class="ri-upload-2-line"></i> Import</label>
+                <input id="usersImportInput" type="file" accept="application/json" hidden />
+                <button class="btn btn-primary" id="usersAdd"><i class="ri-user-add-line"></i> Add user</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="users-bulk" id="usersBulkBar" hidden>
+                <div><strong id="usersSelectedCount">0</strong> selected</div>
+                <div class="row-actions">
+                  <button class="icon-btn" id="bulkActivate" title="Activate"><i class="ri-check-line"></i></button>
+                  <button class="icon-btn" id="bulkSuspend" title="Suspend"><i class="ri-pause-line"></i></button>
+                  <button class="icon-btn" id="bulkDelete" title="Delete"><i class="ri-delete-bin-line"></i></button>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table class="table users-table" id="usersMgrTable">
+                  <thead>
+                    <tr>
+                      <th style="width:32px"><input type="checkbox" id="usersCheckAll" /></th>
+                      <th data-sort="name">Name</th>
+                      <th>Email</th>
+                      <th data-sort="role">Role</th>
+                      <th data-sort="status">Status</th>
+                      <th data-sort="createdAt">Created</th>
+                      <th data-sort="lastActive">Last active</th>
+                      <th style="width:96px"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="usersMgrBody"></tbody>
+                </table>
+              </div>
+              <div class="users-pager">
+                <div class="muted" id="usersPagerInfo">—</div>
+                <div class="pager-controls">
+                  <button class="icon-btn" id="usersPrev" title="Previous"><i class="ri-arrow-left-s-line"></i></button>
+                  <button class="icon-btn" id="usersNext" title="Next"><i class="ri-arrow-right-s-line"></i></button>
+                  <select id="usersPageSize" class="select">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="auth-footer">
+      <div class="container foot">
+        <div class="brand" style="gap:10px">
+          <div class="brand-logo" style="width:26px;height:26px;border-radius:7px"></div>
+          <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+        </div>
+        <div class="links"><a href="index.html#faq">Privacy</a><a href="index.html#pricing">Pricing</a></div>
+      </div>
+    </footer>
+
+    <!-- User modal -->
+    <div class="modal" id="userModal" hidden>
+      <div class="modal-backdrop" data-close></div>
+      <div class="modal-card">
+        <div class="modal-head">
+          <h4 id="userModalTitle">Add user</h4>
+          <button class="icon-btn" data-close aria-label="Close"><i class="ri-close-line"></i></button>
+        </div>
+        <form id="userForm" class="fields">
+          <input type="hidden" id="userId" />
+          <div class="field">
+            <label for="userName">Full name</label>
+            <div class="control"><input type="text" id="userName" required placeholder="Alex Johnson" /></div>
+          </div>
+          <div class="field">
+            <label for="userEmail">Email</label>
+            <div class="control"><input type="email" id="userEmail" required placeholder="you@school.edu" /></div>
+          </div>
+          <div class="field">
+            <label for="userRole">Role</label>
+            <select id="userRole" class="select" required>
+              <option value="Owner">Owner</option>
+              <option value="Manager" selected>Manager</option>
+              <option value="Staff">Staff</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="userStatus">Status</label>
+            <select id="userStatus" class="select" required>
+              <option value="Active" selected>Active</option>
+              <option value="Suspended">Suspended</option>
+            </select>
+          </div>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary"><i class="ri-save-3-line"></i> Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Confirm delete modal -->
+    <div class="modal" id="confirmModal" hidden>
+      <div class="modal-backdrop" data-close></div>
+      <div class="modal-card">
+        <div class="modal-head">
+          <h4>Delete users</h4>
+          <button class="icon-btn" data-close aria-label="Close"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="muted" id="confirmText">Are you sure?</div>
+        <div class="actions" style="margin-top:14px">
+          <button class="btn btn-ghost" data-close>Cancel</button>
+          <button class="btn btn-primary" id="confirmDelete"><i class="ri-delete-bin-2-line"></i> Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>
+
+

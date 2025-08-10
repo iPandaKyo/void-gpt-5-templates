@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Analytics • Edu AI</title>
+    <meta name="description" content="Analytics for Edu AI." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="auth.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <header class="auth-header">
+      <div class="container nav">
+        <a class="brand" href="index.html" style="text-decoration:none;color:inherit">
+          <div class="brand-logo"></div>
+          <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+        </a>
+        <div class="links">
+          <span class="muted">Signed in as <strong id="currentUserEmail">—</strong></span>
+          <a class="btn btn-ghost" href="admin-dashboard.html"><i class="ri-dashboard-line"></i> Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="dash">
+      <div class="container layout">
+        <aside class="sidebar" id="sidebar">
+          <div class="side-head">
+            <div class="brand">
+              <div class="brand-logo"></div>
+              <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+            </div>
+          </div>
+          <nav class="side-nav">
+            <a class="side-link" href="admin-dashboard.html" title="Dashboard"><i class="ri-dashboard-line"></i><span>Dashboard</span></a>
+            <a class="side-link" href="admin-users.html" title="Users"><i class="ri-team-line"></i><span>Users</span></a>
+            <a class="side-link active" href="#" title="Analytics"><i class="ri-line-chart-line"></i><span>Analytics</span></a>
+            <a class="side-link" href="admin-settings.html" title="Settings"><i class="ri-settings-3-line"></i><span>Settings</span></a>
+          </nav>
+          <div class="side-foot">
+            <label class="theme-toggle"><input type="checkbox" id="themeToggle" /><span class="switch"></span><span class="label">Dark mode</span></label>
+          </div>
+        </aside>
+
+        <section class="content">
+          <div class="topbar">
+            <div class="search"><i class="ri-filter-3-line"></i><span class="muted">Analytics</span></div>
+            <div class="actions">
+              <select id="anRange" class="select">
+                <option value="7">Last 7 days</option>
+                <option value="30" selected>Last 30 days</option>
+                <option value="90">Last 90 days</option>
+              </select>
+              <select id="anSegment" class="select">
+                <option value="all" selected>All users</option>
+                <option value="Owner">Owners</option>
+                <option value="Manager">Managers</option>
+                <option value="Staff">Staff</option>
+              </select>
+              <button class="btn btn-ghost" id="anExport"><i class="ri-download-2-line"></i> Export CSV</button>
+            </div>
+          </div>
+
+          <div class="stats analytics-kpis">
+            <div class="stat">
+              <div class="stat-head"><h3>Daily active users</h3><span class="delta up" id="anDauDelta">+0%</span></div>
+              <div class="num" id="anDau">0</div>
+              <canvas class="spark" id="anSparkDau" height="40"></canvas>
+            </div>
+            <div class="stat">
+              <div class="stat-head"><h3>Monthly active users</h3><span class="delta up" id="anMauDelta">+0%</span></div>
+              <div class="num" id="anMau">0</div>
+              <canvas class="spark" id="anSparkMau" height="40"></canvas>
+            </div>
+            <div class="stat">
+              <div class="stat-head"><h3>Avg. session length</h3><span class="delta" id="anSessDelta">~</span></div>
+              <div class="num" id="anSess">0m</div>
+              <canvas class="spark" id="anSparkSess" height="40"></canvas>
+            </div>
+          </div>
+
+          <div class="charts charts--wide-first">
+            <div class="panel"><div class="panel-head"><h4>Usage over time</h4><span class="muted">Active users</span></div><canvas id="anUsageChart" height="130"></canvas></div>
+            <div class="panel"><div class="panel-head"><h4>Feature adoption</h4><span class="muted">Tutor • Plans • Insights</span></div><canvas id="anFeaturesChart" height="130"></canvas></div>
+            <div class="panel"><div class="panel-head"><h4>Conversion funnel</h4><span class="muted">Visit → Signup → Active</span></div><canvas id="anFunnelChart" height="130"></canvas></div>
+          </div>
+          <div class="charts">
+            <div class="panel"><div class="panel-head"><h4>Top regions</h4><span class="muted">Signups by region</span></div><canvas id="anGeoChart" height="130"></canvas></div>
+            <div class="panel"><div class="panel-head"><h4>System load</h4><span class="muted">Requests per minute</span></div><canvas id="anLoadChart" height="130"></canvas></div>
+            <div class="panel"><div class="panel-head"><h4>Retention heatmap</h4><span class="muted">Cohorts by week</span></div><div class="retention-grid" id="anRetention"></div></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="auth-footer">
+      <div class="container foot">
+        <div class="brand" style="gap:10px">
+          <div class="brand-logo" style="width:26px;height:26px;border-radius:7px"></div>
+          <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+        </div>
+        <div class="links"><a href="index.html#faq">Privacy</a><a href="index.html#pricing">Pricing</a></div>
+      </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="analytics.js"></script>
+  </body>
+  </html>
+
+

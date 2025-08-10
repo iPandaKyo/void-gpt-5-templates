@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Admin Sign In • Edu AI</title>
+    <meta name="description" content="Admin sign in for Edu AI." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="auth.css" />
+  </head>
+  <body>
+    <header class="auth-header">
+      <div class="container nav">
+        <a class="brand" href="index.html" style="text-decoration:none;color:inherit">
+          <div class="brand-logo"></div>
+          <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+        </a>
+        <div class="links" style="display:flex;align-items:center;gap:14px">
+          <label class="theme-toggle"><input type="checkbox" id="themeToggle" /><span class="switch"></span><span class="label">Dark mode</span></label>
+          <a href="admin-register.html">Create account</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="auth-wrap">
+      <section class="auth-card">
+        <div class="panel-info">
+          <h1 class="g-brand" style="color:var(--brand-1)">Welcome back, Admin</h1>
+          <p>Secure access to dashboards, user management, and settings.</p>
+          <div class="chips">
+            <span class="chip">SSO-ready</span>
+            <span class="chip">Privacy-first</span>
+            <span class="chip">99.99% uptime</span>
+          </div>
+        </div>
+        <div class="panel-form">
+          <div class="form-card">
+            <h2>Sign in</h2>
+            <p class="subtitle">Use your admin email and password.</p>
+            <div id="toast" class="error" hidden></div>
+            <form id="loginForm" class="fields">
+              <div class="field">
+                <label for="email">Email</label>
+                <div class="control">
+                  <input type="email" id="email" name="email" placeholder="you@school.edu" required />
+                </div>
+              </div>
+              <div class="field">
+                <label for="password">Password</label>
+                <div class="control">
+                  <input type="password" id="password" name="password" placeholder="••••••••" required />
+                  <button type="button" class="toggle-eye" data-eye aria-label="Toggle password"><i class="ri-eye-line"></i></button>
+                </div>
+              </div>
+              <div class="row">
+                <span class="muted">Forgot password? <em>Mock only</em></span>
+              </div>
+              <div class="actions">
+                <button class="btn btn-primary" type="submit"><i class="ri-login-box-line"></i> Sign in</button>
+                <a class="btn btn-ghost" href="admin-register.html"><i class="ri-user-add-line"></i> Create account</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="auth-footer">
+      <div class="container foot">
+        <div class="brand" style="gap:10px">
+          <div class="brand-logo" style="width:26px;height:26px;border-radius:7px"></div>
+          <div class="brand-name">Edu <span class="g-brand" style="color:var(--brand-1)">AI</span></div>
+        </div>
+        <div class="links"><a href="index.html#faq">Privacy</a><a href="index.html#pricing">Pricing</a></div>
+      </div>
+    </footer>
+
+    <script src="auth.js"></script>
+  </body>
+</html>
+
+
