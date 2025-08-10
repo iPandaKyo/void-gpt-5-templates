@@ -3,7 +3,7 @@
 Public templates generated with GPT-5, available for everyone.
 
 ### Overview
-A curated collection of high-quality templates created using GPT-5 to jumpstart your projects. Most templates are mock-ups that you can transform into fully functional apps with a few additional prompts.
+A curated collection of high-quality templates created using GPT-5 to jumpstart your projects. Most templates are mock-ups that you can transform into fully functional apps with additional prompts.
 
 ### Features
 - **GPT-5 generated**: Modern, clean code produced with GPT-5
