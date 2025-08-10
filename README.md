@@ -73,6 +73,27 @@ Known limitations (intended for template/demo use):
 - Uses CDNs; offline usage disables optional effects (guarded fallbacks keep pages usable)
 - Mock authentication and storage only (localStorage). For production, implement real auth (e.g., Argon2/bcrypt, sessions/JWT, CSRF, rate limiting)
 
+## Template Media Gallery
+
+GPT5_EduAI
+<img width="1775" height="1296" alt="15" src="https://github.com/user-attachments/assets/d3bd1611-eb69-4ffe-866b-51f08c0cdae2" />
+<img width="1879" height="1286" alt="14" src="https://github.com/user-attachments/assets/e995077a-6f96-447a-9040-e9d12de7850c" />
+<img width="2542" height="1286" alt="13" src="https://github.com/user-attachments/assets/1bfc6083-62ff-4314-838b-6132eb6f768b" />
+<img width="1455" height="1301" alt="12" src="https://github.com/user-attachments/assets/d430bd53-1c6a-4c9a-a8a2-f1d24dfbdb98" />
+<img width="1332" height="1304" alt="11" src="https://github.com/user-attachments/assets/340ce52f-d65f-4839-9e86-d918c0a31c5c" />
+<img width="1470" height="1286" alt="10" src="https://github.com/user-attachments/assets/d345846f-6b87-4d44-b4fb-75f4416129d5" />
+<img width="1332" height="1286" alt="9" src="https://github.com/user-attachments/assets/7c6b2cb1-a3a4-4767-8687-3b9837b5b441" />
+<img width="1617" height="888" alt="8" src="https://github.com/user-attachments/assets/8b0041a3-e4d7-401f-a690-e7d3815f5dde" />
+<img width="1745" height="1302" alt="7" src="https://github.com/user-attachments/assets/93b8fc5d-8ebf-4c43-ab06-cedb45ae860b" />
+<img width="1882" height="1175" alt="6" src="https://github.com/user-attachments/assets/f322d825-9d6c-4a54-9b99-2546ec5ec5b8" />
+<img width="2537" height="1298" alt="5" src="https://github.com/user-attachments/assets/f26ca090-4441-4e3a-8946-9a5c420603f8" />
+<img width="2178" height="1242" alt="4" src="https://github.com/user-attachments/assets/6949fd1d-9019-4191-933a-aeea8392141b" />
+<img width="2537" height="1299" alt="3" src="https://github.com/user-attachments/assets/9494c9ef-a247-469d-a8c5-5883286afbf7" />
+<img width="2533" height="1301" alt="2" src="https://github.com/user-attachments/assets/aed2545a-109e-4ed3-a62e-c1a329fbd26d" />
+<img width="1617" height="888" alt="1" src="https://github.com/user-attachments/assets/de2ca3cc-8642-4027-b97c-8abb4ff7c76c" />
+
+
+
 ## Contributing
 - **Fork** the repository
 - **Create a branch** for your template or improvement
