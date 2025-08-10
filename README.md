@@ -75,7 +75,7 @@ Known limitations (intended for template/demo use):
 
 ## Template Media Gallery
 
-GPT5_EduAI
+###GPT5_EduAI
 <img width="1775" height="1296" alt="15" src="https://github.com/user-attachments/assets/d3bd1611-eb69-4ffe-866b-51f08c0cdae2" />
 <img width="1879" height="1286" alt="14" src="https://github.com/user-attachments/assets/e995077a-6f96-447a-9040-e9d12de7850c" />
 <img width="2542" height="1286" alt="13" src="https://github.com/user-attachments/assets/1bfc6083-62ff-4314-838b-6132eb6f768b" />
